@@ -8,8 +8,10 @@ from langchain.llms import OpenAI
 from langchain.chains import RetrievalQA
 
 st.set_page_config(page_title="RAG Chatbot", layout="wide")
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+OPENAI_API_KEY = st.secrets.get("OPENAI_API_KEY",None)
 assert OPENAI_API_KEY, "Set OPENAI_API_KEY in Secrets"
+
+os.environ["OPENAI_API_KEY"] = OPENAI_API_KEY
 
 # Sidebar: PDF upload
 st.sidebar.header("Upload PDFs")
@@ -55,5 +57,3 @@ if os.path.exists(db_path):
             st.write(f"- Page {src.metadata.get('page_number','?')}")
 else:
     st.info("Upload PDFs to begin.")
-
-
