@@ -1,6 +1,6 @@
 import os
 import streamlit as st
-from langchain.document_loaders import PyPDFLoader
+from langchain_community.document_loaders import PyPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.vectorstores import FAISS
@@ -55,5 +55,5 @@ if os.path.exists(db_path):
             st.write(f"- Page {src.metadata.get('page_number','?')}")
 else:
     st.info("Upload PDFs to begin.")
-    
+
 
